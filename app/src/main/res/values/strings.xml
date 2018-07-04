@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LearnMVVM</string>
+    <string name="languages">Languages: %s</string>
+    <string name="watchers">Watchers: %s</string>
+    <string name="openIssues">Open Issues: %s</string>
+    <string name="created_at">Created At: %s</string>
+    <string name="updated_at">Updated At: %s</string>
+    <string name="clone_url">Clone URL: %s</string>
+</resources>

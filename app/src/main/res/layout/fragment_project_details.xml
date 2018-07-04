@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="projectViewModel"
+            type="com.xujiaji.learnmvvm.viewmodel.ProjectViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/loading_project"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="加载详情中..."
+            android:textAlignment="center"
+            app:visibleGone="@{isLoading}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:paddingTop="16dp"
+            app:visibleGone="@{!isLoading}">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@mipmap/ic_launcher_round" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="项目名"
+                android:paddingBottom="5dp"
+                android:text="@{projectViewModel.project.name}"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/project_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="项目描述"
+                android:text="@{projectViewModel.project.description}"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/languages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="项目语言"
+                android:text="@{String.format(@string/languages, projectViewModel.project.language)}"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/project_watchers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="项目关注数"
+                android:text="@{String.format(@string/watchers, projectViewModel.project.watchers)}"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/project_open_issues"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="项目issues数"
+                android:text="@{String.format(@string/openIssues, projectViewModel.project.open_issues)}"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/project_created_at"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="Created At"
+                android:text="@{String.format(@string/created_at, projectViewModel.project.created_at)}"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/project_updated_at"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="Updated At"
+                android:text="@{String.format(@string/updated_at, projectViewModel.project.updated_at)}"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/clone_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="open Issues"
+                android:text="@{String.format(@string/clone_url, projectViewModel.project.clone_url)}"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</layout>
