@@ -1,4 +1,4 @@
-package com.xujiaji.learnmvvm.viewmodel;
+package com.xujiaji.learnmvvm.module.projectlist;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;

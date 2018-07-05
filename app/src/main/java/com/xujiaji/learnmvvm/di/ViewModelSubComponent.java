@@ -1,8 +1,9 @@
 package com.xujiaji.learnmvvm.di;
 
-import com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel;
-import com.xujiaji.learnmvvm.viewmodel.ProjectViewModel;
+import com.xujiaji.learnmvvm.module.projectlist.ProjectListViewModel;
+import com.xujiaji.learnmvvm.module.projectdetail.ProjectViewModel;
 
+import dagger.Lazy;
 import dagger.Subcomponent;
 
 /**
@@ -19,6 +20,6 @@ public interface ViewModelSubComponent
         ViewModelSubComponent build();
     }
 
-    ProjectListViewModel projectListViewModel();
-    ProjectViewModel projectViewModel();
+    Lazy<ProjectListViewModel> projectListViewModel();
+    Lazy<ProjectViewModel> projectViewModel();
 }

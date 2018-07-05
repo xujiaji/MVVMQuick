@@ -10,7 +10,7 @@
 
         <variable
             name="projectListViewModel"
-            type="com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel"/>
+            type="com.xujiaji.learnmvvm.module.projectlist.ProjectListViewModel"/>
     </data>
 
     <LinearLayout

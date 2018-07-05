@@ -1,11 +1,12 @@
-package com.xujiaji.learnmvvm.view.ui;
+package com.xujiaji.learnmvvm.module.projectdetail;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.xujiaji.mvvmquick.base.MQFragment;
 import com.xujiaji.learnmvvm.databinding.FragmentProjectDetailsBinding;
-import com.xujiaji.learnmvvm.viewmodel.ProjectViewModel;
+import com.xujiaji.mvvmquick.di.ActivityScoped;
+
+import javax.inject.Inject;
 
 
 /**
@@ -13,9 +14,13 @@ import com.xujiaji.learnmvvm.viewmodel.ProjectViewModel;
  * created on: 2018/6/12 10:43
  * description:
  */
+@ActivityScoped
 public class ProjectFragment extends MQFragment<FragmentProjectDetailsBinding, ProjectViewModel>
 {
     public static final String KEY_PROJECT_ID = "project_id";
+
+    @Inject
+    public ProjectFragment() {}
 
     @Override
     public void onBinding(FragmentProjectDetailsBinding binding)

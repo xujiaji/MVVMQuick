@@ -10,7 +10,7 @@
 
         <variable
             name="projectViewModel"
-            type="com.xujiaji.learnmvvm.viewmodel.ProjectViewModel" />
+            type="com.xujiaji.learnmvvm.module.projectdetail.ProjectViewModel" />
     </data>
 
     <FrameLayout

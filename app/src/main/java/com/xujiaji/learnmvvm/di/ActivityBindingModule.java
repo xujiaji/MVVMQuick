@@ -1,6 +1,8 @@
 package com.xujiaji.learnmvvm.di;
 
-import com.xujiaji.learnmvvm.view.ui.MainActivity;
+import com.xujiaji.learnmvvm.module.main.MainModule;
+import com.xujiaji.learnmvvm.module.main.MainActivity;
+import com.xujiaji.mvvmquick.di.ActivityScoped;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -13,6 +15,7 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBindingModule
 {
-    @ContributesAndroidInjector(modules = FragmentBuildersModule.class)
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = MainModule.class)
     abstract MainActivity contributeMainActivity();
 }

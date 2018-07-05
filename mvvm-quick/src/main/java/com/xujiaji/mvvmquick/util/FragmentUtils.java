@@ -1,7 +1,10 @@
 package com.xujiaji.mvvmquick.util;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+
+import java.util.ArrayList;
 
 /**
  * author: xujiaji
@@ -13,38 +16,31 @@ public class FragmentUtils
 
     /**
      * 创建Fragment的实例
-     * @param tClass Fragment的class
-     * @param keys 设置参数时的key
+     *
+     * @param keys   设置参数时的key
      * @param values 对应key的值
      * @return 创建好的Fragment实例
      */
-    public static <T extends Fragment> T create(Class<T> tClass, String[] keys, String[] values)
+    public static <T extends Fragment> T setArgs(T fragment, String[] keys, String ... values)
     {
-        try
+
+        if (keys != null && values != null && keys.length != 0)
         {
-            T fragment = tClass.newInstance();
+            if (keys.length != values.length)
+                throw new RuntimeException("keys size must be equal values size");
 
-            if (keys != null && values != null && keys.length != 0)
+            Bundle args = new Bundle();
+
+            for (int i = 0; i < keys.length; i++)
             {
-                if (keys.length != values.length) throw new RuntimeException("keys size must be equal values size");
-
-                Bundle args = new Bundle();
-
-                for (int i = 0; i < keys.length; i++)
-                {
-                    args.putString(keys[i], values[i]);
-                }
-
-                fragment.setArguments(args);
+                args.putString(keys[i], values[i]);
             }
 
-            return fragment;
-        } catch (InstantiationException e)
-        {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e)
-        {
-            throw new RuntimeException(e);
+            fragment.setArguments(args);
         }
+
+        return fragment;
+
     }
+
 }

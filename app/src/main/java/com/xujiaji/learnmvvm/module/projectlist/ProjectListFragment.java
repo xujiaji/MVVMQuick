@@ -1,24 +1,30 @@
-package com.xujiaji.learnmvvm.view.ui;
+package com.xujiaji.learnmvvm.module.projectlist;
 
 import android.arch.lifecycle.Lifecycle;
 
 import com.xujiaji.learnmvvm.databinding.FragmentProjectListBinding;
-import com.xujiaji.learnmvvm.view.adapter.ProjectAdapter;
-import com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel;
+import com.xujiaji.learnmvvm.module.main.MainActivity;
 import com.xujiaji.mvvmquick.base.MQFragment;
+import com.xujiaji.mvvmquick.di.ActivityScoped;
 
 import javax.inject.Inject;
+
+import dagger.Lazy;
 
 /**
  * author: xujiaji
  * created on: 2018/6/11 22:30
  * description:
  */
+@ActivityScoped
 public class ProjectListFragment extends MQFragment<FragmentProjectListBinding, ProjectListViewModel>
 {
 
     @Inject
-    ProjectAdapter mAdapter;
+    Lazy<ProjectAdapter> mAdapter;
+
+    @Inject
+    public ProjectListFragment() {}
 
     @Override
     public void onBinding(FragmentProjectListBinding binding)
@@ -48,6 +54,6 @@ public class ProjectListFragment extends MQFragment<FragmentProjectListBinding, 
             }
         });
 
-        binding.projectList.setAdapter(mAdapter);
+        binding.projectList.setAdapter(mAdapter.get());
     }
 }

@@ -4,8 +4,8 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
 import com.xujiaji.learnmvvm.service.repository.Api;
-import com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel;
-import com.xujiaji.learnmvvm.viewmodel.ProjectViewModel;
+import com.xujiaji.learnmvvm.module.projectlist.ProjectListViewModel;
+import com.xujiaji.learnmvvm.module.projectdetail.ProjectViewModel;
 import com.xujiaji.mvvmquick.viewmodel.ProjectViewModelFactory;
 
 import java.util.HashMap;
@@ -14,6 +14,8 @@ import java.util.concurrent.Callable;
 
 import javax.inject.Singleton;
 
+import dagger.Binds;
+import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -27,12 +29,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * description:
  */
 @Module(subcomponents = ViewModelSubComponent.class)
-public class AppModule
+public abstract class AppModule
 {
 
     @Singleton
     @Provides
-    Api provideApi()
+    static Api provideApi()
     {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -47,13 +49,16 @@ public class AppModule
 
     @Singleton
     @Provides
-    ViewModelProvider.Factory provideViewModelFactory(ViewModelSubComponent.Builder viewModelSubComponent)
+    static Map<Class<?>, Callable<Lazy<? extends ViewModel>>> providesViewModel(ViewModelSubComponent.Builder viewModelSubComponent)
     {
         ViewModelSubComponent vmsc = viewModelSubComponent.build();
-
-        Map<Class<?>, Callable<? extends ViewModel>> creators = new HashMap<>();
-        creators.put(ProjectViewModel.class, vmsc::projectViewModel);
-        creators.put(ProjectListViewModel.class, vmsc::projectListViewModel);
-        return new ProjectViewModelFactory(creators);
+        Map<Class<?>, Callable<Lazy<? extends ViewModel>>> creators = new HashMap<>();
+        creators.put(ProjectViewModel.class, () -> vmsc.projectViewModel());
+        creators.put(ProjectListViewModel.class, () -> vmsc.projectListViewModel());
+        return creators;
     }
+
+    @Singleton
+    @Binds
+    abstract ViewModelProvider.Factory provideViewModelFactory(ProjectViewModelFactory factory);
 }

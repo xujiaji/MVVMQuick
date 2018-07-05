@@ -9,18 +9,19 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import dagger.Lazy;
+
 /**
  * author: xujiaji
  * created on: 2018/6/12 13:22
  * description:
  */
-@Singleton
 public class ProjectViewModelFactory implements ViewModelProvider.Factory
 {
-    private final Map<Class<?>, Callable<? extends ViewModel>> creators;
+    private final Map<Class<?>, Callable<Lazy<? extends ViewModel>>> creators;
 
     @Inject
-    public ProjectViewModelFactory(Map<Class<?>, Callable<? extends ViewModel>> creators)
+    public ProjectViewModelFactory(Map<Class<?>, Callable<Lazy<? extends ViewModel>>> creators)
     {
         this.creators = creators;
     }
@@ -29,10 +30,10 @@ public class ProjectViewModelFactory implements ViewModelProvider.Factory
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass)
     {
-        Callable<? extends ViewModel> creator = creators.get(modelClass);
+        Callable<Lazy<? extends ViewModel>> creator = creators.get(modelClass);
         if (creator == null)
         {
-            for (Map.Entry<Class<?>, Callable<? extends ViewModel>> entry : creators.entrySet())
+            for (Map.Entry<Class<?>, Callable<Lazy<? extends ViewModel>>> entry : creators.entrySet())
             {
                 if (modelClass.isAssignableFrom(entry.getKey()))
                 {
@@ -47,7 +48,7 @@ public class ProjectViewModelFactory implements ViewModelProvider.Factory
         }
         try
         {
-            return (T) creator.call();
+            return (T) creator.call().get();
         } catch (Exception e)
         {
             throw new RuntimeException(e);
