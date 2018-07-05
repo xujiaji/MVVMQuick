@@ -3,6 +3,19 @@
 
 将大部分逻辑抽象，希望可以通过几步简单的配置，即可省去重复逻辑的代码。
 
+# Note
+目前还在测试开发中，有兴趣的朋友可以体验体验给给建议哦！如要运用到项目中请自行下载项目导入`mvvm-quik`模块，也可直接以该项目开始开发。
+
+该项目参考：
+
+1. [学习MVVM的实际运用，并且结合Dagger](https://proandroiddev.com/mvvm-architecture-viewmodel-and-livedata-part-2-di-1a6b1f96d84b)
+2. [todo-mvp-dagger](https://github.com/googlesamples/android-architecture/tree/todo-mvp-dagger)
+3. [todo-mvvm-live](https://github.com/googlesamples/android-architecture/tree/todo-mvvm-live)
+4. [todo-mvvm-databinding](https://github.com/googlesamples/android-architecture/tree/todo-mvvm-databinding)
+5. [mvvm-sample-app](https://github.com/hazems/mvvm-sample-app)
+6. [LearnMVVM](https://github.com/xujiaji/learn-android/tree/learn-mvvm)
+
+
 # Use
 > 1.定义ViewModel，继承`MQViewModel`
 
