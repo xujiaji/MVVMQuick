@@ -66,7 +66,7 @@ public class ProjectListFragment extends MQFragment<FragmentProjectListBinding, 
     }
 }
 ```
-> 4.在[ViewModelSubComponent](app\src\main\java\com\xujiaji\learnmvvm\di\ViewModelSubComponent.java)中添加配置，提供ViewModel实例（实例提供通过Dagger实现）
+> 4.在[ViewModelSubComponent](app/src/main/java/com/xujiaji/learnmvvm/di/ViewModelSubComponent.java)中添加配置，提供ViewModel实例（实例提供通过Dagger实现）
 
 ```java
 @Subcomponent
@@ -76,7 +76,7 @@ public interface ViewModelSubComponent
     Lazy<ProjectListViewModel> projectListViewModel(); //add
 }
 ```
-> 5.在[AppModule](app\src\main\java\com\xujiaji\learnmvvm\di\AppModule.java)的`providesViewModel`方法中添加配置
+> 5.在[AppModule](app/src/main/java/com/xujiaji/learnmvvm/di/AppModule.java)的`providesViewModel`方法中添加配置
 
 ```java
     @Singleton
