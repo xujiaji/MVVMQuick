@@ -35,7 +35,7 @@ public class ListItemsBindingAdapter
     public static <T, V extends BaseViewHolder> void setItems(RecyclerView recyclerView, List<T> items)
     {
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
-        if (adapter == null || ! (adapter instanceof BaseQuickAdapter)) return;
+        if (!(adapter instanceof BaseQuickAdapter)) return;
         BaseQuickAdapter<T, V> ad = (BaseQuickAdapter<T, V>) adapter;
         ad.setNewData(items);
     }

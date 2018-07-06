@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~    Copyright 2018 XuJiaji
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,48 +25,56 @@
 
         <variable
             name="projectListViewModel"
-            type="com.xujiaji.learnmvvm.module.projectlist.ProjectListViewModel"/>
+            type="com.xujiaji.learnmvvm.module.projectlist.ProjectListViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="正在加载列表..."
-            android:textAlignment="center"
-            app:visibleGone="@{isLoading}"/>
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center_vertical|center_horizontal"-->
+            <!--android:text="正在加载列表..."-->
+            <!--android:textAlignment="center"-->
+            <!--app:visibleGone="@{isLoading}" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:orientation="vertical"
-            app:visibleGone="@{!isLoading}">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textSize="25sp"
-                android:text="Github Projects"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:textAlignment="center"/>
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="Github Projects"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/project_list"
-                android:contentDescription="项目列表"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/project_refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:items="@{projectListViewModel.items}"
-                app:layoutManager="LinearLayoutManager"/>
+                android:onRefresh="@{projectListViewModel}"
+                app:refreshing="@{isLoading}">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/project_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="项目列表"
+                    app:items="@{projectListViewModel.items}"
+                    app:layoutManager="LinearLayoutManager" />
+
+            </android.support.v4.widget.SwipeRefreshLayout>
 
         </LinearLayout>
 

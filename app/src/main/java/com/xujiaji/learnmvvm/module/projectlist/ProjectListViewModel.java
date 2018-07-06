@@ -27,7 +27,9 @@ import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.learnmvvm.service.repository.Net;
 import com.xujiaji.mvvmquick.base.MQViewModel;
 import com.xujiaji.mvvmquick.lifecycle.SingleLiveEvent;
+import com.xujiaji.mvvmquick.viewmodel.RefreshLoadViewModel;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,10 +41,11 @@ import javax.inject.Singleton;
  * description:
  */
 @Singleton
-public class ProjectListViewModel extends MQViewModel
+public class ProjectListViewModel extends RefreshLoadViewModel
 {
     private final LiveData<List<Project>> projectListObservable;
     private final SingleLiveEvent<Project> mClickProjectEvent = new SingleLiveEvent<>();
+    private final WeakReference<Net> netWR;
 
     public final ObservableList<Project> items = new ObservableArrayList<>();
 
@@ -51,6 +54,17 @@ public class ProjectListViewModel extends MQViewModel
     {
         super(application);
         projectListObservable = net.getProjectList("xujiaji");
+        netWR = new WeakReference<>(net);
+    }
+
+    @Override
+    public void toRefresh()
+    {
+        super.toRefresh();
+        if (netWR.get() != null)
+        {
+            netWR.get().getProjectList("xujiaji");
+        }
     }
 
     public LiveData<List<Project>> getProjectListObservable()

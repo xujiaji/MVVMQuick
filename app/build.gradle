@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -19,7 +20,7 @@ android {
     }
     dataBinding {
         enabled = true
-   }
+    }
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -30,10 +31,13 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    implementation "com.android.support:cardview-v7:$support"
+    implementation "com.android.support:design:$support"
     implementation "com.android.support.constraint:constraint-layout:$constraintLayout"
     annotationProcessor "android.arch.lifecycle:compiler:$arch"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
+    implementation "com.qfxl:roundProgressBar:$roundProgressBar"
+    implementation 'com.mikhaellopez:circularimageview:3.0.2'
     implementation project(':mvvm-quick')
 }

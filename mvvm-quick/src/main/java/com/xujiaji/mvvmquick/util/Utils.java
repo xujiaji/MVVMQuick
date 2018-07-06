@@ -16,6 +16,8 @@
 
 package com.xujiaji.mvvmquick.util;
 
+import android.view.View;
+
 /**
  * author: xujiaji
  * created on: 2018/6/12 10:40
@@ -26,4 +28,15 @@ public class Utils
     public static boolean equals(Object a, Object b) {
         return (a == b) || (a != null && a.equals(b));
     }
+
+    public static boolean toggleArrow(View view) {
+        if (view.getRotation() == 0) {
+            view.animate().setDuration(200).rotation(180);
+            return true;
+        } else {
+            view.animate().setDuration(200).rotation(0);
+            return false;
+        }
+    }
+
 }

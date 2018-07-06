@@ -17,7 +17,9 @@
 package com.xujiaji.learnmvvm.module.projectlist;
 
 import android.arch.lifecycle.Lifecycle;
+import android.support.v4.widget.SwipeRefreshLayout;
 
+import com.xujiaji.learnmvvm.R;
 import com.xujiaji.learnmvvm.databinding.FragmentProjectListBinding;
 import com.xujiaji.learnmvvm.module.main.MainActivity;
 import com.xujiaji.mvvmquick.base.MQFragment;
@@ -71,5 +73,6 @@ public class ProjectListFragment extends MQFragment<FragmentProjectListBinding, 
         });
 
         binding.projectList.setAdapter(mAdapter.get());
+        mAdapter.get().setEmptyView(R.layout.no_item_archived, binding.projectList);
     }
 }

@@ -51,7 +51,17 @@
                 android:contentDescription="name of the project"
                 android:textStyle="bold"
                 android:textSize="16sp"
+                android:textColor="@color/textPrimary"
                 android:text="@{project.name}"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="Project Description"
+                android:textSize="16sp"
+                android:text="@{project.description}"/>
+
 
             <TextView
                 android:id="@+id/languages"
@@ -68,6 +78,23 @@
                 android:contentDescription="Project Watchers"
                 android:textSize="16sp"
                 android:text="@{String.format(@string/watchers, project.watchers)}"/>
+
+            <TextView
+                android:id="@+id/project_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Project Stars"
+                android:textSize="16sp"
+                android:text="@{String.format(@string/stars, project.stargazers_count)}"/>
+
+            <TextView
+                android:id="@+id/project_forks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Project Forks"
+                android:textSize="16sp"
+                android:text="@{String.format(@string/forks, project.forks_count)}"/>
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

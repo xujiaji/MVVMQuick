@@ -17,6 +17,7 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
         jcenter()
         maven { url "https://jitpack.io" }
@@ -34,4 +35,8 @@ ext{
     arch             = '1.1.1'
     constraintLayout = '1.1.1'
     dagger           = '2.11'
+    glide            = '4.7.1'
+    adapterHelper    = '2.9.40'
+    constraintLayout = '1.1.2'
+    roundProgressBar = '1.0.1'
 }

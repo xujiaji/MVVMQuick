@@ -24,9 +24,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import static dagger.internal.Preconditions.checkNotNull;
 
 /**
@@ -90,11 +87,7 @@ public class ActivityUtils
     }
 
 
-    /**
-     * 是否退出了Activity
-     */
-    private static boolean isExit = false;
-
+    private static long exitTime = 0;
     /**
      * 作用如：2s内双击两次返回则退出程序
      *
@@ -113,22 +106,10 @@ public class ActivityUtils
      */
     public static boolean exitBy2Click(int space)
     {
-        Timer tExit;
-        if (!isExit)
-        {
-            isExit = true; // 准备退出
-            tExit = new Timer();
-            tExit.schedule(new TimerTask()
-            {
-                @Override
-                public void run()
-                {
-                    isExit = false; // 取消退出
-                }
-            }, space); // 如果space毫秒内没有按下返回键，则启动定时器取消掉刚才执行的任务
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            exitTime = System.currentTimeMillis();
             return false;
-        } else
-        {
+        } else {
             return true;
         }
     }
@@ -156,28 +137,28 @@ public class ActivityUtils
         view.setLayoutParams(statusParams);
     }
 
-    private static long lastClickTime;
-
-    public static boolean isFastClick()
-    {
-        return isFastClick(false);
-    }
-
-    public static boolean isFastClick(boolean isPrompt)
-    {
-        long time = System.currentTimeMillis();
-        long timeD = time - lastClickTime;
-        if (timeD < 2000)
-        {
-            if (isPrompt)
-            {
-                ToastUtil.getInstance().showShortT("重复点击！");
-            }
-            return true;
-        } else
-        {
-            lastClickTime = time;
-            return false;
-        }
-    }
+//    private static long lastClickTime;
+//
+//    public static boolean isFastClick()
+//    {
+//        return isFastClick(false);
+//    }
+//
+//    public static boolean isFastClick(boolean isPrompt)
+//    {
+//        long time = System.currentTimeMillis();
+//        long timeD = time - lastClickTime;
+//        if (timeD < 2000)
+//        {
+//            if (isPrompt)
+//            {
+//                ToastUtil.getInstance().s("重复点击！");
+//            }
+//            return true;
+//        } else
+//        {
+//            lastClickTime = time;
+//            return false;
+//        }
+//    }
 }

@@ -22,7 +22,11 @@ import android.arch.lifecycle.MutableLiveData;
 import com.xujiaji.mvvmquick.callback.NetCallback;
 import com.xujiaji.learnmvvm.service.model.Project;
 
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -38,6 +42,7 @@ import retrofit2.Call;
 public class Net
 {
     private Api mApi;
+    private Map<String, WeakReference<MutableLiveData<?>>> mLiveDataMap = new HashMap<>();
 
     @Inject
     public Net(Api api)
@@ -48,9 +53,17 @@ public class Net
     /**
      * 统一数据处理
      */
-    private <T> LiveData<T> handle(Call<T> call)
+    private <T> LiveData<T> handle(String key, Call<T> call)
     {
-        final MutableLiveData<T> data = new MutableLiveData<>();
+        final MutableLiveData<T> data;
+        if (mLiveDataMap.containsKey(key) && mLiveDataMap.get(key).get() != null)
+        {
+            data = (MutableLiveData<T>) mLiveDataMap.get(key).get();
+        } else
+        {
+            data = new MutableLiveData<>();
+            mLiveDataMap.put(key, new WeakReference<>(data));
+        }
         call.enqueue(new NetCallback<>(data));
         return data;
     }
@@ -60,7 +73,7 @@ public class Net
      */
     public LiveData<List<Project>> getProjectList(String userId)
     {
-        return handle(mApi.getProjectList(userId));
+        return handle("getProjectList", mApi.getProjectList(userId));
     }
 
     /**
@@ -68,6 +81,6 @@ public class Net
      */
     public LiveData<Project> getProjectDetails(String userId, String projectName)
     {
-        return handle(mApi.getProjectDetails(userId, projectName));
+        return handle("getProjectDetails", mApi.getProjectDetails(userId, projectName));
     }
 }

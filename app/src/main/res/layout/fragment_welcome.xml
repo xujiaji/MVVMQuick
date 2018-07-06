@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~    Copyright 2018 XuJiaji
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/adPic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"/>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:srcCompat="@drawable/ic_launcher" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:text="@string/app_name"
+                android:textColor="@color/textPrimary"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <com.qfxl.view.RoundProgressBar
+            android:id="@+id/roundProgressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rpb_autoStart="true"
+            app:rpb_centerBackgroundColor="@color/overlay_dark_30"
+            app:rpb_centerText="跳过"
+            app:rpb_centerTextColor="#fff"
+            app:rpb_centerTextSize="12sp"
+            app:rpb_countDownTimeInMillis="3000"
+            app:rpb_drawOutsideWrapper="true"
+            app:rpb_outsideWrapperColor="@color/overlay_dark_50"
+            app:rpb_progressDirection="forward"
+            app:rpb_sweepStartAngle="-90"
+            app:rpb_sweepStrokeColor="@color/green_600"
+            app:rpb_sweepStrokeWidth="2dp" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

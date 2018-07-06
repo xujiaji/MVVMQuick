@@ -18,8 +18,8 @@ package com.xujiaji.learnmvvm.module.projectdetail;
 
 import android.os.Bundle;
 
-import com.xujiaji.mvvmquick.base.MQFragment;
 import com.xujiaji.learnmvvm.databinding.FragmentProjectDetailsBinding;
+import com.xujiaji.mvvmquick.base.MQFragment;
 import com.xujiaji.mvvmquick.di.ActivityScoped;
 
 import javax.inject.Inject;

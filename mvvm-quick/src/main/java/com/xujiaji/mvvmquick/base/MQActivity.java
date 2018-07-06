@@ -71,6 +71,7 @@ public class MQActivity<B extends ViewDataBinding, VM extends AndroidViewModel> 
         binding = ClassUtils.getBinding(this, getLayoutInflater(), ((ViewGroup)findViewById(android.R.id.content)));
         if (binding != null)
             setContentView(binding.getRoot());
+        onBinding(binding);
     }
 
     @Override

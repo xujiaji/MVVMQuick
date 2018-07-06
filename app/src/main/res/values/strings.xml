@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">LearnMVVM</string>
+    <string name="app_name">MVVMQuick</string>
     <string name="languages">Languages: %s</string>
-    <string name="watchers">Watchers: %s</string>
+    <string name="watchers">Watcher: %s</string>
+    <string name="stars">Star: %s</string>
+    <string name="forks">Fork: %s</string>
     <string name="openIssues">Open Issues: %s</string>
     <string name="created_at">Created At: %s</string>
     <string name="updated_at">Updated At: %s</string>
     <string name="clone_url">Clone URL: %s</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

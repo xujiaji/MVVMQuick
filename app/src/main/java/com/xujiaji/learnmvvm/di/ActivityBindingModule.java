@@ -18,6 +18,8 @@ package com.xujiaji.learnmvvm.di;
 
 import com.xujiaji.learnmvvm.module.main.MainModule;
 import com.xujiaji.learnmvvm.module.main.MainActivity;
+import com.xujiaji.learnmvvm.module.start.StartActivity;
+import com.xujiaji.learnmvvm.module.start.StartModule;
 import com.xujiaji.mvvmquick.di.ActivityScoped;
 
 import dagger.Module;
@@ -34,4 +36,8 @@ public abstract class ActivityBindingModule
     @ActivityScoped
     @ContributesAndroidInjector(modules = MainModule.class)
     abstract MainActivity contributeMainActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = StartModule.class)
+    abstract StartActivity contributeStartActivity();
 }
