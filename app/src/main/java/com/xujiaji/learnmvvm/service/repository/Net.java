@@ -18,6 +18,7 @@ package com.xujiaji.learnmvvm.service.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.text.TextUtils;
 
 import com.xujiaji.mvvmquick.callback.NetCallback;
 import com.xujiaji.learnmvvm.service.model.Project;
@@ -53,16 +54,19 @@ public class Net
     /**
      * 统一数据处理
      */
-    private <T> LiveData<T> handle(String key, Call<T> call)
+    private <T> MutableLiveData<T> handle(String key, Call<T> call)
     {
         final MutableLiveData<T> data;
-        if (mLiveDataMap.containsKey(key) && mLiveDataMap.get(key).get() != null)
+        if (!TextUtils.isEmpty(key) && mLiveDataMap.containsKey(key) && mLiveDataMap.get(key).get() != null)
         {
             data = (MutableLiveData<T>) mLiveDataMap.get(key).get();
         } else
         {
             data = new MutableLiveData<>();
-            mLiveDataMap.put(key, new WeakReference<>(data));
+            if (!TextUtils.isEmpty(key))
+            {
+                mLiveDataMap.put(key, new WeakReference<>(data));
+            }
         }
         call.enqueue(new NetCallback<>(data));
         return data;
@@ -71,7 +75,7 @@ public class Net
     /**
      * 获取项目列表
      */
-    public LiveData<List<Project>> getProjectList(String userId)
+    public MutableLiveData<List<Project>> getProjectList(String userId)
     {
         return handle("getProjectList", mApi.getProjectList(userId));
     }
@@ -79,8 +83,8 @@ public class Net
     /**
      * 获取项目详情信息
      */
-    public LiveData<Project> getProjectDetails(String userId, String projectName)
+    public MutableLiveData<Project> getProjectDetails(String userId, String projectName)
     {
-        return handle("getProjectDetails", mApi.getProjectDetails(userId, projectName));
+        return handle(null, mApi.getProjectDetails(userId, projectName));
     }
 }

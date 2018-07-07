@@ -31,4 +31,9 @@ public class MQViewModel extends AndroidViewModel
     {
         super(application);
     }
+
+    public void onDestroy()
+    {
+
+    }
 }

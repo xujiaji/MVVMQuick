@@ -39,4 +39,6 @@ ext{
     adapterHelper    = '2.9.40'
     constraintLayout = '1.1.2'
     roundProgressBar = '1.0.1'
+    statusbarutil    = '1.5.1'
+    circleImg        = '3.0.2'
 }

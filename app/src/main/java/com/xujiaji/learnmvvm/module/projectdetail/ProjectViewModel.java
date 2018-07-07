@@ -66,7 +66,6 @@ public class ProjectViewModel extends MQViewModel
         });
     }
 
-
     public LiveData<Project> getObservableProject()
     {
         return projectObservable;

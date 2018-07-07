@@ -16,7 +16,6 @@
 
 package com.xujiaji.mvvmquick.base;
 
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.ViewDataBinding;
@@ -39,12 +38,14 @@ import dagger.android.support.DaggerFragment;
  * created on: 2018/6/13 13:49
  * description: Fragment基类
  */
-public class MQFragment<B extends ViewDataBinding, VM extends AndroidViewModel> extends DaggerFragment implements BindingViewModel<B, VM>
+public class MQFragment<B extends ViewDataBinding, VM extends MQViewModel> extends DaggerFragment implements BindingViewModel<B, VM>
 {
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
 
     protected B binding;
+
+    protected VM viewModel;
 
     @Nullable
     @Override
@@ -76,10 +77,24 @@ public class MQFragment<B extends ViewDataBinding, VM extends AndroidViewModel> 
         {
             viewModel = ViewModelProviders.of(this, mViewModelFactory).get(viewModelClass);
         }
-
+        this.viewModel = viewModel;
         onObserveViewModel(viewModel);
     }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (viewModel != null)
+        {
+            viewModel.onDestroy();
+            viewModel = null;
+        }
+        if (binding != null)
+        {
+            binding.unbind();
+        }
+    }
 
     /**
      * 实例化ViewModel是否通过Activity

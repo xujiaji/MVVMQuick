@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="200dp"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -16,11 +16,14 @@
         android:id="@+id/avatar"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_margin="@dimen/spacing_large"
+        android:layout_above="@+id/linearLayout"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginLeft="@dimen/spacing_large"
         android:src="@drawable/head"
         app:civ_border_width="2dp" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

@@ -38,6 +38,7 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide"
     implementation "com.qfxl:roundProgressBar:$roundProgressBar"
-    implementation 'com.mikhaellopez:circularimageview:3.0.2'
+    implementation "com.mikhaellopez:circularimageview:$circleImg"
+    implementation "com.jaeger.statusbarutil:library:$statusbarutil"
     implementation project(':mvvm-quick')
 }

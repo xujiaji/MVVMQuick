@@ -26,46 +26,19 @@
             android:id="@+id/adPic"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="centerCrop"/>
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:background="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:srcCompat="@drawable/ic_launcher" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:text="@string/app_name"
-                android:textColor="@color/textPrimary"
-                android:textSize="24sp" />
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.qfxl.view.RoundProgressBar
             android:id="@+id/roundProgressBar"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -81,6 +54,34 @@
             app:rpb_sweepStartAngle="-90"
             app:rpb_sweepStrokeColor="@color/green_600"
             app:rpb_sweepStrokeWidth="2dp" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:srcCompat="@drawable/ic_launcher" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="@string/app_name"
+                android:textColor="@color/textPrimary"
+                android:textSize="24sp" />
+        </LinearLayout>
+
 
     </android.support.constraint.ConstraintLayout>
 </layout>

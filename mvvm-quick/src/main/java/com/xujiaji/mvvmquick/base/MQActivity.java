@@ -44,6 +44,8 @@ public class MQActivity<B extends ViewDataBinding, VM extends AndroidViewModel> 
 
     protected B binding;
 
+    protected VM viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -60,6 +62,7 @@ public class MQActivity<B extends ViewDataBinding, VM extends AndroidViewModel> 
         Class<VM> viewModelClass = ClassUtils.getViewModel(this);
         if (viewModelClass == null) return;
         final VM viewModel = ViewModelProviders.of(this, mViewModelFactory).get(viewModelClass);
+        this.viewModel = viewModel;
         onObserveViewModel(viewModel);
     }
 

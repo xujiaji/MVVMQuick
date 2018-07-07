@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -33,6 +34,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jaeger.library.StatusBarUtil;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.xujiaji.learnmvvm.R;
 import com.xujiaji.learnmvvm.databinding.ActivityMainBinding;
@@ -80,6 +82,7 @@ public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewMod
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.setColorForDrawerLayout(this, binding.drawerLayout, ContextCompat.getColor(this, R.color.colorPrimaryDark), 0);
         initToolbar();
         initNavigationMenu();
         if (savedInstanceState == null)
@@ -148,7 +151,7 @@ public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewMod
 
     private void onItemNavigationClicked(MenuItem item) {
         if (!is_account_mode) {
-            Toast.makeText(getApplicationContext(), item.getTitle() + " Selected", Toast.LENGTH_SHORT).show();
+            ToastUtil.getInstance().showShort(item.getTitle() + " Selected");
             actionBar.setTitle(item.getTitle());
             binding.drawerLayout.closeDrawers();
         } else {
@@ -167,7 +170,7 @@ public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewMod
                     avatar.setImageResource(R.drawable.photo_male_2);
                     break;
                 default:
-                    Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                    ToastUtil.getInstance().showShort(item.getTitle().toString());
                     break;
             }
         }
@@ -203,6 +206,11 @@ public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewMod
     @Override
     public void onBackPressed()
     {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START))
+        {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            return;
+        }
         if (getSupportFragmentManager().getBackStackEntryCount() > 0 || ActivityUtils.exitBy2Click())
         {
             super.onBackPressed();
