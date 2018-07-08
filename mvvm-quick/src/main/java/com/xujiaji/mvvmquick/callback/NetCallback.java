@@ -18,6 +18,11 @@ package com.xujiaji.mvvmquick.callback;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.xujiaji.mvvmquick.util.ToastUtil;
+
+import java.net.UnknownHostException;
+import java.util.concurrent.TimeoutException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,6 +49,16 @@ public class NetCallback<T> implements Callback<T>
     @Override
     public void onFailure(Call<T> call, Throwable t)
     {
+        if (t instanceof UnknownHostException)
+        {
+            ToastUtil.getInstance().showShort("请检查网络");
+        } else if (t instanceof TimeoutException)
+        {
+            ToastUtil.getInstance().showShort("连接超时");
+        } else
+        {
+            ToastUtil.getInstance().showShort(t.getMessage());
+        }
         mutableLiveData.setValue(null);
     }
 }

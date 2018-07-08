@@ -48,7 +48,6 @@ public class ProjectListFragment extends MQFragment<FragmentProjectListBinding, 
     public void onBinding(FragmentProjectListBinding binding)
     {
         binding.projectRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimaryDark, R.color.colorPrimary);
-        binding.setIsLoading(true);
     }
 
     @Override

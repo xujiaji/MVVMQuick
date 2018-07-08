@@ -37,4 +37,12 @@ public class RefreshLoadViewModel extends MQViewModel
     public void toRefresh() {}
 
     public void toLoad() {}
+
+    /**
+     * 超时时间(单位：s)
+     */
+    public int timeout()
+    {
+        return 20;
+    }
 }

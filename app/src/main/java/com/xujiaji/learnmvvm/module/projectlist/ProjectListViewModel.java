@@ -17,7 +17,6 @@
 package com.xujiaji.learnmvvm.module.projectlist;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
@@ -25,7 +24,6 @@ import android.support.annotation.NonNull;
 
 import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.learnmvvm.service.repository.Net;
-import com.xujiaji.mvvmquick.base.MQViewModel;
 import com.xujiaji.mvvmquick.lifecycle.SingleLiveEvent;
 import com.xujiaji.mvvmquick.viewmodel.RefreshLoadViewModel;
 

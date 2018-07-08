@@ -17,13 +17,41 @@
 package com.xujiaji.mvvmquick.binding.adapter;
 
 import android.databinding.BindingAdapter;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.xujiaji.mvvmquick.viewmodel.RefreshLoadViewModel;
 
+import java.lang.ref.WeakReference;
+
 
 public class SwipeRefreshLayoutBindingAdapter
 {
+
+    private static final int CODE = 1001;
+
+    private static class Handler extends android.os.Handler {
+
+        private WeakReference<SwipeRefreshLayout> wr;
+
+        private Handler(SwipeRefreshLayout srl)
+        {
+            wr = new WeakReference<>(srl);
+        }
+
+        @Override
+        public void handleMessage(Message msg)
+        {
+            if (wr.get() == null) return;
+            if (msg.what == CODE)
+            {
+                if (wr.get().isRefreshing())
+                {
+                    wr.get().setRefreshing(false);
+                }
+            }
+        }
+    }
 
     /**
      * Reloads the data when the pull-to-refresh is triggered.
@@ -31,12 +59,16 @@ public class SwipeRefreshLayoutBindingAdapter
      * Creates the {@code android:onRefresh} for a {@link SwipeRefreshLayout}.
      */
     @BindingAdapter("android:onRefresh")
-    public static <T extends RefreshLoadViewModel> void setSwipeRefreshLayoutOnRefreshListener(SwipeRefreshLayout view,
-            final T viewModel) {
+    public static <T extends RefreshLoadViewModel> void setSwipeRefreshLayoutOnRefreshListener(final SwipeRefreshLayout view,
+                                                                                               final T viewModel) {
+        final Handler handler = new Handler(view);
+
         view.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                handler.removeMessages(CODE);
                 viewModel.toRefresh();
+                handler.sendEmptyMessageDelayed(CODE, viewModel.timeout() * 1000);
             }
         });
     }

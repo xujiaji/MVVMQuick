@@ -88,22 +88,22 @@ public final class ToastUtil
     // -------------------------
     public void showShort(final String tips)
     {
-        showToast(tips, -1, Toast.LENGTH_SHORT, true, 0);
+        showToast(tips, -1, Toast.LENGTH_SHORT, true, R.color.overlay_light_90);
     }
 
     public void showShort(final int tips)
     {
-        showToast(null, tips, Toast.LENGTH_SHORT, true, 0);
+        showToast(null, tips, Toast.LENGTH_SHORT, true, R.color.overlay_light_90);
     }
 
     public void showLong(final String tips)
     {
-        showToast(tips, -1, Toast.LENGTH_LONG, true, 0);
+        showToast(tips, -1, Toast.LENGTH_LONG, true, R.color.overlay_light_90);
     }
 
     public void showLong(final int tips)
     {
-        showToast(null, tips, Toast.LENGTH_LONG, true, 0);
+        showToast(null, tips, Toast.LENGTH_LONG, true, R.color.overlay_light_90);
     }
 
     // -------------------------
@@ -195,7 +195,6 @@ public final class ToastUtil
                             duration,
                             isCustom,
                             color);
-                    mToast.show();
                 } else
                 {
                     if (isCustom)
@@ -210,8 +209,8 @@ public final class ToastUtil
                         mToast.setText(TextUtils.isEmpty(tips) ? MQApp.getInstance().getString(tipi) : tips);
                     }
                     mToast.setDuration(duration);
-                    mToast.show();
                 }
+                mToast.show();
             }
         });
     }

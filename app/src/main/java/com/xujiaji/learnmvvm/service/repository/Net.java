@@ -16,18 +16,16 @@
 
 package com.xujiaji.learnmvvm.service.repository;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.text.TextUtils;
 
-import com.xujiaji.mvvmquick.callback.NetCallback;
 import com.xujiaji.learnmvvm.service.model.Project;
+import com.xujiaji.mvvmquick.callback.NetCallback;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -42,6 +40,16 @@ import retrofit2.Call;
 @Singleton
 public class Net
 {
+    /**
+     * 读取超时
+     */
+    public static final int TIME_OUT_READ = 20;
+
+    /**
+     * 连接超时
+     */
+    public static final int TIME_OUT_CONNECT = 5;
+
     private Api mApi;
     private Map<String, WeakReference<MutableLiveData<?>>> mLiveDataMap = new HashMap<>();
 

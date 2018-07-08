@@ -22,11 +22,13 @@ import android.arch.lifecycle.ViewModelProvider;
 import com.xujiaji.learnmvvm.service.repository.Api;
 import com.xujiaji.learnmvvm.module.projectlist.ProjectListViewModel;
 import com.xujiaji.learnmvvm.module.projectdetail.ProjectViewModel;
+import com.xujiaji.learnmvvm.service.repository.Net;
 import com.xujiaji.mvvmquick.viewmodel.ProjectViewModelFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
@@ -54,7 +56,11 @@ public abstract class AppModule
     {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .connectTimeout(Net.TIME_OUT_CONNECT, TimeUnit.SECONDS)
+                .readTimeout(Net.TIME_OUT_READ, TimeUnit.SECONDS)
+                .build();
         return new Retrofit.Builder()
                 .baseUrl(Api.URL)
                 .client(client)
