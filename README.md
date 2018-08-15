@@ -17,6 +17,8 @@
 
 
 # Use
+详细使用案例请参考：https://github.com/xujiaji/WanAndroid
+
 > 1.定义ViewModel，继承`MQViewModel`
 
 ``` java

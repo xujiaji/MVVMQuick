@@ -23,8 +23,7 @@ import java.util.Date;
  * created on: 2018/6/11 21:49
  * description:
  */
-public class Project
-{
+public class Project {
     public long id;
     public String name;
     public String full_name;

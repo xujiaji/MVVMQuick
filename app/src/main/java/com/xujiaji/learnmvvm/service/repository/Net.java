@@ -17,15 +17,10 @@
 package com.xujiaji.learnmvvm.service.repository;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.text.TextUtils;
 
 import com.xujiaji.learnmvvm.service.model.Project;
-import com.xujiaji.mvvmquick.callback.NetCallback;
 
-import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -38,8 +33,7 @@ import retrofit2.Call;
  * description:
  */
 @Singleton
-public class Net
-{
+public class Net {
     /**
      * 读取超时
      */
@@ -51,31 +45,17 @@ public class Net
     public static final int TIME_OUT_CONNECT = 5;
 
     private Api mApi;
-    private Map<String, WeakReference<MutableLiveData<?>>> mLiveDataMap = new HashMap<>();
 
     @Inject
-    public Net(Api api)
-    {
+    public Net(Api api) {
         this.mApi = api;
     }
 
     /**
      * 统一数据处理
      */
-    private <T> MutableLiveData<T> handle(String key, Call<T> call)
-    {
-        final MutableLiveData<T> data;
-        if (!TextUtils.isEmpty(key) && mLiveDataMap.containsKey(key) && mLiveDataMap.get(key).get() != null)
-        {
-            data = (MutableLiveData<T>) mLiveDataMap.get(key).get();
-        } else
-        {
-            data = new MutableLiveData<>();
-            if (!TextUtils.isEmpty(key))
-            {
-                mLiveDataMap.put(key, new WeakReference<>(data));
-            }
-        }
+    private <T> MutableLiveData<T> handle(Call<T> call) {
+        final MutableLiveData<T> data = new MutableLiveData<>();
         call.enqueue(new NetCallback<>(data));
         return data;
     }
@@ -83,16 +63,14 @@ public class Net
     /**
      * 获取项目列表
      */
-    public MutableLiveData<List<Project>> getProjectList(String userId)
-    {
-        return handle("getProjectList", mApi.getProjectList(userId));
+    public MutableLiveData<List<Project>> getProjectList(String userId) {
+        return handle(mApi.getProjectList(userId));
     }
 
     /**
      * 获取项目详情信息
      */
-    public MutableLiveData<Project> getProjectDetails(String userId, String projectName)
-    {
-        return handle(null, mApi.getProjectDetails(userId, projectName));
+    public MutableLiveData<Project> getProjectDetails(String userId, String projectName) {
+        return handle(mApi.getProjectDetails(userId, projectName));
     }
 }

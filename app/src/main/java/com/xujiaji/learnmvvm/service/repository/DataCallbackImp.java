@@ -16,25 +16,36 @@
 
 package com.xujiaji.learnmvvm.service.repository;
 
-import com.xujiaji.learnmvvm.service.model.Project;
 
-import java.util.List;
+import android.widget.Toast;
 
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import com.xujiaji.learnmvvm.base.App;
 
 /**
  * author: xujiaji
- * created on: 2018/6/11 21:50
+ * created on: 2018/8/12 0:33
  * description:
  */
-public interface Api {
-    String URL = "https://api.github.com/";
+public abstract class DataCallbackImp<T> implements DataCallback<T> {
 
-    @GET("users/{user}/repos")
-    Call<List<Project>> getProjectList(@Path("user") String user);
+    private boolean isToastErr = true;
 
-    @GET("/repos/{user}/{reponame}")
-    Call<Project> getProjectDetails(@Path("user") String user, @Path("reponame") String projectName);
+    public DataCallbackImp() {
+    }
+
+    public DataCallbackImp(boolean isToastErr) {
+        this.isToastErr = isToastErr;
+    }
+
+    @Override
+    public void finished() {
+
+    }
+
+    @Override
+    public void fail(int code, String msg) {
+        if (isToastErr && msg != null) {
+            Toast.makeText(App.getInstance(), msg, Toast.LENGTH_SHORT).show();
+        }
+    }
 }

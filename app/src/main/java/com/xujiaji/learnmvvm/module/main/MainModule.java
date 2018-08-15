@@ -29,8 +29,7 @@ import dagger.android.ContributesAndroidInjector;
  * description:
  */
 @Module
-public abstract class MainModule
-{
+public abstract class MainModule {
     @FragmentScoped
     @ContributesAndroidInjector
     abstract ProjectFragment contributeProjectFragment();

@@ -22,8 +22,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import com.xujiaji.learnmvvm.R;
 import com.xujiaji.learnmvvm.databinding.FragmentProjectListBinding;
 import com.xujiaji.learnmvvm.module.main.MainActivity;
+import com.xujiaji.learnmvvm.service.model.Project;
+import com.xujiaji.learnmvvm.service.repository.DataCallbackImp;
 import com.xujiaji.mvvmquick.base.MQFragment;
 import com.xujiaji.mvvmquick.di.ActivityScoped;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -35,39 +39,35 @@ import dagger.Lazy;
  * description:
  */
 @ActivityScoped
-public class ProjectListFragment extends MQFragment<FragmentProjectListBinding, ProjectListViewModel>
-{
+public class ProjectListFragment extends MQFragment<FragmentProjectListBinding, ProjectListViewModel> {
 
     @Inject
     Lazy<ProjectAdapter> mAdapter;
 
     @Inject
-    public ProjectListFragment() {}
+    public ProjectListFragment() {
+    }
 
     @Override
-    public void onBinding(FragmentProjectListBinding binding)
-    {
+    public void onBinding(FragmentProjectListBinding binding) {
         binding.projectRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimaryDark, R.color.colorPrimary);
     }
 
     @Override
-    public void onObserveViewModel(ProjectListViewModel viewModel)
-    {
+    public void onObserveViewModel(ProjectListViewModel viewModel) {
         binding.setProjectListViewModel(viewModel);
-        viewModel.getProjectListObservable().observe(this, projects ->
-        {
-            if (projects != null)
-            {
+        viewModel.getProjectListObservable().observeData(this, new DataCallbackImp<List<Project>>() {
+            @Override
+            public void success(List<Project> bean) {
                 binding.setIsLoading(false);
                 viewModel.items.clear();
-                viewModel.items.addAll(projects);
+                viewModel.items.addAll(bean);
             }
         });
 
         viewModel.getClickProjectEvent().observe(this, project ->
         {
-            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED) && getActivity() instanceof MainActivity)
-            {
+            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED) && getActivity() instanceof MainActivity) {
                 ((MainActivity) getActivity()).show(project);
             }
         });

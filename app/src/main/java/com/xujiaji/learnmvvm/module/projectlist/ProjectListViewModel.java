@@ -17,17 +17,15 @@
 package com.xujiaji.learnmvvm.module.projectlist;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.support.annotation.NonNull;
 
+import com.xujiaji.learnmvvm.base.BaseViewModel;
 import com.xujiaji.learnmvvm.service.model.Project;
-import com.xujiaji.learnmvvm.service.repository.Net;
+import com.xujiaji.learnmvvm.service.repository.NetLiveEvent;
 import com.xujiaji.mvvmquick.lifecycle.SingleLiveEvent;
-import com.xujiaji.mvvmquick.viewmodel.RefreshLoadViewModel;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,39 +37,31 @@ import javax.inject.Singleton;
  * description:
  */
 @Singleton
-public class ProjectListViewModel extends RefreshLoadViewModel
-{
-    private final LiveData<List<Project>> projectListObservable;
-    private final SingleLiveEvent<Project> mClickProjectEvent = new SingleLiveEvent<>();
-    private final WeakReference<Net> netWR;
+public class ProjectListViewModel extends BaseViewModel {
 
+
+    private final NetLiveEvent<List<Project>> projectListObservable = new NetLiveEvent<>();
+    private final SingleLiveEvent<Project> mClickProjectEvent = new SingleLiveEvent<>();
     public final ObservableList<Project> items = new ObservableArrayList<>();
 
     @Inject
-    public ProjectListViewModel(@NonNull Net net, @NonNull Application application)
-    {
+    public ProjectListViewModel(@NonNull Application application) {
         super(application);
-        projectListObservable = net.getProjectList("xujiaji");
-        netWR = new WeakReference<>(net);
     }
 
     @Override
-    public void toRefresh()
-    {
-        super.toRefresh();
-        if (netWR.get() != null)
-        {
-            netWR.get().getProjectList("xujiaji");
-        }
+    public void onListRefresh() {
+        super.onListRefresh();
+        projectListObservable.setValue(net.get().getProjectList("xujiaji"));
     }
 
-    public LiveData<List<Project>> getProjectListObservable()
-    {
+
+    public NetLiveEvent<List<Project>> getProjectListObservable() {
+        projectListObservable.setValue(net.get().getProjectList("xujiaji"));
         return projectListObservable;
     }
 
-    public SingleLiveEvent<Project> getClickProjectEvent()
-    {
+    public SingleLiveEvent<Project> getClickProjectEvent() {
         return mClickProjectEvent;
     }
 }

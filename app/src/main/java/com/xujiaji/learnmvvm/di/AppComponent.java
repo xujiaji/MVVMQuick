@@ -38,12 +38,12 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AppModule.class,
         ActivityBindingModule.class
 })
-public interface AppComponent extends AndroidInjector<App>
-{
+public interface AppComponent extends AndroidInjector<App> {
     @Component.Builder
-    interface Builder
-    {
-        @BindsInstance Builder application(Application application);
+    interface Builder {
+        @BindsInstance
+        Builder application(Application application);
+
         AppComponent build();
     }
 }

@@ -14,35 +14,29 @@
  *    limitations under the License.
  */
 
-package com.xujiaji.mvvmquick.viewmodel;
-
-import android.app.Application;
-import android.support.annotation.NonNull;
-
-import com.xujiaji.mvvmquick.base.MQViewModel;
+package com.xujiaji.learnmvvm.service.repository;
 
 /**
  * author: xujiaji
- * created on: 2018/7/6 18:43
+ * created on: 2018/8/12 0:11
  * description:
  */
-public class RefreshLoadViewModel extends MQViewModel
-{
-    public RefreshLoadViewModel(@NonNull Application application)
-    {
-        super(application);
-    }
-
-
-    public void toRefresh() {}
-
-    public void toLoad() {}
+public interface DataCallback<T> {
+    /**
+     * 完成回调，不管成功还是失败
+     */
+    void finished();
 
     /**
-     * 超时时间(单位：s)
+     * 成功得到数据
      */
-    public int timeout()
-    {
-        return 20;
-    }
+    void success(T bean);
+
+    /**
+     * 失败
+     *
+     * @param code 错误码
+     * @param msg  错误消息
+     */
+    void fail(int code, String msg);
 }

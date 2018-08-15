@@ -31,8 +31,7 @@ import dagger.android.ContributesAndroidInjector;
  * description:
  */
 @Module
-public abstract class ActivityBindingModule
-{
+public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = MainModule.class)
     abstract MainActivity contributeMainActivity();

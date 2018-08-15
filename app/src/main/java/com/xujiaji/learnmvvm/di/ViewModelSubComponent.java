@@ -28,14 +28,13 @@ import dagger.Subcomponent;
  * description:
  */
 @Subcomponent
-public interface ViewModelSubComponent
-{
+public interface ViewModelSubComponent {
     @Subcomponent.Builder
-    interface Builder
-    {
+    interface Builder {
         ViewModelSubComponent build();
     }
 
     Lazy<ProjectListViewModel> projectListViewModel();
+
     Lazy<ProjectViewModel> projectViewModel();
 }

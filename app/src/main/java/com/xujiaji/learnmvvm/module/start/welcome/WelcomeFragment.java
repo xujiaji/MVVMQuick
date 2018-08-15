@@ -28,19 +28,16 @@ import com.xujiaji.mvvmquick.di.ActivityScoped;
 import javax.inject.Inject;
 
 @ActivityScoped
-public class WelcomeFragment extends MQFragment<FragmentWelcomeBinding, MQViewModel>
-{
+public class WelcomeFragment extends MQFragment<FragmentWelcomeBinding, MQViewModel> {
 
     private boolean isOver;
 
     @Inject
-    public WelcomeFragment()
-    {
+    public WelcomeFragment() {
     }
 
     @Override
-    public void onBinding(FragmentWelcomeBinding binding)
-    {
+    public void onBinding(FragmentWelcomeBinding binding) {
         super.onBinding(binding);
         StatusBarUtil.setTranslucentForImageViewInFragment(getActivity(), binding.roundProgressBar);
 
@@ -48,17 +45,14 @@ public class WelcomeFragment extends MQFragment<FragmentWelcomeBinding, MQViewMo
                 .load("https://raw.githubusercontent.com/xujiaji/xujiaji.github.io/pictures/mvvmquick/welcome2.png")
                 .into(binding.adPic);
 
-        binding.roundProgressBar.setProgressChangeListener(new RoundProgressBar.ProgressChangeListener()
-        {
+        binding.roundProgressBar.setProgressChangeListener(new RoundProgressBar.ProgressChangeListener() {
             @Override
-            public void onFinish()
-            {
+            public void onFinish() {
                 goMainActivity();
             }
 
             @Override
-            public void onProgressChanged(int progress)
-            {
+            public void onProgressChanged(int progress) {
 
             }
         });
@@ -71,8 +65,7 @@ public class WelcomeFragment extends MQFragment<FragmentWelcomeBinding, MQViewMo
 
     }
 
-    private void goMainActivity()
-    {
+    private void goMainActivity() {
         if (getActivity() == null || isOver) return;
         isOver = true;
         MainActivity.launch(getActivity());

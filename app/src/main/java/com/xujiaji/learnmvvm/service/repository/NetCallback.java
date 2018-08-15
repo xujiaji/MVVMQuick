@@ -14,11 +14,12 @@
  *    limitations under the License.
  */
 
-package com.xujiaji.mvvmquick.callback;
+package com.xujiaji.learnmvvm.service.repository;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.widget.Toast;
 
-import com.xujiaji.mvvmquick.util.ToastUtil;
+import com.xujiaji.learnmvvm.base.App;
 
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeoutException;
@@ -32,32 +33,26 @@ import retrofit2.Response;
  * created on: 2018/6/12 16:42
  * description: 网络请求回调统一处理
  */
-public class NetCallback<T> implements Callback<T>
-{
+public class NetCallback<T> implements Callback<T> {
     private final MutableLiveData<T> mutableLiveData;
-    public NetCallback(MutableLiveData<T> mutableLiveData)
-    {
+
+    public NetCallback(MutableLiveData<T> mutableLiveData) {
         this.mutableLiveData = mutableLiveData;
     }
 
     @Override
-    public void onResponse(Call<T> call, Response<T> response)
-    {
+    public void onResponse(Call<T> call, Response<T> response) {
         mutableLiveData.setValue(response.body());
     }
 
     @Override
-    public void onFailure(Call<T> call, Throwable t)
-    {
-        if (t instanceof UnknownHostException)
-        {
-            ToastUtil.getInstance().showShort("请检查网络");
-        } else if (t instanceof TimeoutException)
-        {
-            ToastUtil.getInstance().showShort("连接超时");
-        } else
-        {
-            ToastUtil.getInstance().showShort(t.getMessage());
+    public void onFailure(Call<T> call, Throwable t) {
+        if (t instanceof UnknownHostException) {
+            Toast.makeText(App.getInstance(), "请检查网络", Toast.LENGTH_SHORT).show();
+        } else if (t instanceof TimeoutException) {
+            Toast.makeText(App.getInstance(), "连接超时", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(App.getInstance(), t.getMessage(), Toast.LENGTH_SHORT).show();
         }
         mutableLiveData.setValue(null);
     }

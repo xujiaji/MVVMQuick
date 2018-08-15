@@ -14,18 +14,43 @@
  *    limitations under the License.
  */
 
-package com.xujiaji.learnmvvm.module.start.guide;
+package com.xujiaji.learnmvvm.base;
 
-import com.xujiaji.learnmvvm.databinding.FragmentGuideBinding;
-import com.xujiaji.mvvmquick.base.MQFragment;
+import android.app.Application;
+import android.support.annotation.NonNull;
+
+import com.xujiaji.learnmvvm.service.repository.Net;
 import com.xujiaji.mvvmquick.base.MQViewModel;
-import com.xujiaji.mvvmquick.di.ActivityScoped;
 
 import javax.inject.Inject;
 
-@ActivityScoped
-public class GuideFragment extends MQFragment<FragmentGuideBinding, MQViewModel> {
+import dagger.Lazy;
+
+public class BaseViewModel extends MQViewModel {
+
+    /**
+     * 更新时的第一页页码
+     */
+    public static final int UPDATE_INDEX = 0;
+    /**
+     * 加载初始偏移度
+     */
+    public static final int INIT_LOAD_OFFSET = 0;
+
     @Inject
-    public GuideFragment() {
+    protected Lazy<Net> net;
+
+    public BaseViewModel(@NonNull Application application) {
+        super(application);
+    }
+
+    @Override
+    public int timeout() {
+        return Net.TIME_OUT_READ;
+    }
+
+    @Override
+    public int initLoadOffset() {
+        return INIT_LOAD_OFFSET;
     }
 }

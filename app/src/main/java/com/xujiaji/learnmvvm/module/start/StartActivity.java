@@ -29,8 +29,7 @@ import javax.inject.Inject;
 
 import dagger.Lazy;
 
-public class StartActivity extends MQActivity
-{
+public class StartActivity extends MQActivity {
 
     @Inject
     Lazy<WelcomeFragment> mWelcomeFragment;
@@ -38,13 +37,11 @@ public class StartActivity extends MQActivity
     Lazy<GuideFragment> mGuideFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_container);
 
-        if (savedInstanceState == null)
-        {
+        if (savedInstanceState == null) {
             ActivityUtils.addFragmentInActivity(
                     getSupportFragmentManager(),
                     mWelcomeFragment.get(),

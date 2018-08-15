@@ -47,13 +47,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * description:
  */
 @Module(subcomponents = ViewModelSubComponent.class)
-public abstract class AppModule
-{
+public abstract class AppModule {
 
     @Singleton
     @Provides
-    static Api provideApi()
-    {
+    static Api provideApi() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
@@ -71,8 +69,7 @@ public abstract class AppModule
 
     @Singleton
     @Provides
-    static Map<Class<?>, Callable<Lazy<? extends ViewModel>>> providesViewModel(ViewModelSubComponent.Builder viewModelSubComponent)
-    {
+    static Map<Class<?>, Callable<Lazy<? extends ViewModel>>> providesViewModel(ViewModelSubComponent.Builder viewModelSubComponent) {
         ViewModelSubComponent vmsc = viewModelSubComponent.build();
         Map<Class<?>, Callable<Lazy<? extends ViewModel>>> creators = new HashMap<>();
         creators.put(ProjectViewModel.class, vmsc::projectViewModel);

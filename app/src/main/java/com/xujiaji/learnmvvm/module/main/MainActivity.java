@@ -29,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jaeger.library.StatusBarUtil;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -40,7 +41,6 @@ import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.mvvmquick.base.MQActivity;
 import com.xujiaji.mvvmquick.util.ActivityUtils;
 import com.xujiaji.mvvmquick.util.FragmentUtils;
-import com.xujiaji.mvvmquick.util.ToastUtil;
 import com.xujiaji.mvvmquick.util.Utils;
 
 import javax.inject.Inject;
@@ -50,8 +50,7 @@ import dagger.Lazy;
 import static com.xujiaji.learnmvvm.module.projectdetail.ProjectFragment.KEY_PROJECT_ID;
 
 
-public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewModel>
-{
+public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewModel> {
 
     @Inject
     Lazy<ProjectListFragment> mProjectListFragment;
@@ -63,26 +62,22 @@ public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewMod
     private View navigation_header;
     private boolean is_account_mode = false;
 
-    public static void launch(Context context)
-    {
+    public static void launch(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
     }
 
     @Override
-    public void onBinding(ActivityMainBinding binding)
-    {
+    public void onBinding(ActivityMainBinding binding) {
         super.onBinding(binding);
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.setColorForDrawerLayout(this, binding.drawerLayout, ContextCompat.getColor(this, R.color.colorPrimaryDark), 0);
         initToolbar();
         initNavigationMenu();
-        if (savedInstanceState == null)
-        {
+        if (savedInstanceState == null) {
             ActivityUtils.addFragmentInActivity(
                     getSupportFragmentManager(),
                     mProjectListFragment.get(),
@@ -147,7 +142,7 @@ public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewMod
 
     private void onItemNavigationClicked(MenuItem item) {
         if (!is_account_mode) {
-            ToastUtil.getInstance().showShort(item.getTitle() + " Selected");
+            Toast.makeText(this, item.getTitle() + " Selected", Toast.LENGTH_SHORT).show();
             actionBar.setTitle(item.getTitle());
             binding.drawerLayout.closeDrawers();
         } else {
@@ -166,7 +161,7 @@ public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewMod
                     avatar.setImageResource(R.drawable.photo_male_2);
                     break;
                 default:
-                    ToastUtil.getInstance().showShort(item.getTitle().toString());
+                    Toast.makeText(this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -189,8 +184,7 @@ public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewMod
         ((TextView) m.findItem(R.id.nav_spam).getActionView().findViewById(R.id.text)).setText("13");
     }
 
-    public void show(Project project)
-    {
+    public void show(Project project) {
         ActivityUtils.replaceFragmentInActivity(
                 getSupportFragmentManager(),
                 FragmentUtils.setArgs(mProjectFragment.get(), new String[]{KEY_PROJECT_ID}, project.name),
@@ -200,19 +194,15 @@ public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewMod
     }
 
     @Override
-    public void onBackPressed()
-    {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START))
-        {
+    public void onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START);
             return;
         }
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0 || ActivityUtils.exitBy2Click())
-        {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0 || ActivityUtils.exitBy2Click()) {
             super.onBackPressed();
-        } else
-        {
-            ToastUtil.getInstance().showShortY("再点一次退出");
+        } else {
+            Toast.makeText(this, "再点一次退出", Toast.LENGTH_SHORT).show();
         }
     }
 }

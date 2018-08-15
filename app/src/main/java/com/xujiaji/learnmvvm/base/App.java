@@ -27,12 +27,10 @@ import dagger.android.support.DaggerApplication;
  * created on: 2018/6/12 11:49
  * description:
  */
-public class App extends MQApp
-{
+public class App extends MQApp {
 
     @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector()
-    {
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerAppComponent.builder()
                 .application(this)
                 .build();
