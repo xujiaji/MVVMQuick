@@ -17,9 +17,12 @@
 package com.xujiaji.learnmvvm.service.repository;
 
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
 
 import com.xujiaji.learnmvvm.base.App;
+
+import java.lang.ref.WeakReference;
 
 /**
  * author: xujiaji
@@ -29,6 +32,7 @@ import com.xujiaji.learnmvvm.base.App;
 public abstract class DataCallbackImp<T> implements DataCallback<T> {
 
     private boolean isToastErr = true;
+    private WeakReference<SwipeRefreshLayout> refreshLayout;
 
     public DataCallbackImp() {
     }
@@ -37,9 +41,16 @@ public abstract class DataCallbackImp<T> implements DataCallback<T> {
         this.isToastErr = isToastErr;
     }
 
+    public
+    DataCallbackImp(SwipeRefreshLayout refreshLayout) {
+        this.refreshLayout = new WeakReference<>(refreshLayout);
+    }
+
     @Override
     public void finished() {
-
+        if (refreshLayout != null && refreshLayout.get() != null) {
+            refreshLayout.get().setRefreshing(false);
+        }
     }
 
     @Override

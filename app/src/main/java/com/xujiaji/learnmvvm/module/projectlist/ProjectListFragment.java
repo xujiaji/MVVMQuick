@@ -56,7 +56,7 @@ public class ProjectListFragment extends MQFragment<FragmentProjectListBinding, 
     @Override
     public void onObserveViewModel(ProjectListViewModel viewModel) {
         binding.setProjectListViewModel(viewModel);
-        viewModel.getProjectListObservable().observeData(this, new DataCallbackImp<List<Project>>() {
+        viewModel.getProjectListObservable().observeData(this, new DataCallbackImp<List<Project>>(binding.projectRefresh) {
             @Override
             public void success(List<Project> bean) {
                 binding.setIsLoading(false);

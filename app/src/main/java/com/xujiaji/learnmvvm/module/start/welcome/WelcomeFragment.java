@@ -22,13 +22,13 @@ import com.qfxl.view.RoundProgressBar;
 import com.xujiaji.learnmvvm.databinding.FragmentWelcomeBinding;
 import com.xujiaji.learnmvvm.module.main.MainActivity;
 import com.xujiaji.mvvmquick.base.MQFragment;
-import com.xujiaji.mvvmquick.base.MQViewModel;
+import com.xujiaji.mvvmquick.base.NoneViewModel;
 import com.xujiaji.mvvmquick.di.ActivityScoped;
 
 import javax.inject.Inject;
 
 @ActivityScoped
-public class WelcomeFragment extends MQFragment<FragmentWelcomeBinding, MQViewModel> {
+public class WelcomeFragment extends MQFragment<FragmentWelcomeBinding, NoneViewModel> {
 
     private boolean isOver;
 

@@ -16,7 +16,6 @@
 
 package com.xujiaji.learnmvvm.module.main;
 
-import android.arch.lifecycle.AndroidViewModel;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,6 +38,7 @@ import com.xujiaji.learnmvvm.module.projectdetail.ProjectFragment;
 import com.xujiaji.learnmvvm.module.projectlist.ProjectListFragment;
 import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.mvvmquick.base.MQActivity;
+import com.xujiaji.mvvmquick.base.NoneViewModel;
 import com.xujiaji.mvvmquick.util.ActivityUtils;
 import com.xujiaji.mvvmquick.util.FragmentUtils;
 import com.xujiaji.mvvmquick.util.Utils;
@@ -50,7 +50,7 @@ import dagger.Lazy;
 import static com.xujiaji.learnmvvm.module.projectdetail.ProjectFragment.KEY_PROJECT_ID;
 
 
-public class MainActivity extends MQActivity<ActivityMainBinding, AndroidViewModel> {
+public class MainActivity extends MQActivity<ActivityMainBinding, NoneViewModel> {
 
     @Inject
     Lazy<ProjectListFragment> mProjectListFragment;

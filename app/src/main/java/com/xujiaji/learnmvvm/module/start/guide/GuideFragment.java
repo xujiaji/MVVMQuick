@@ -19,12 +19,13 @@ package com.xujiaji.learnmvvm.module.start.guide;
 import com.xujiaji.learnmvvm.databinding.FragmentGuideBinding;
 import com.xujiaji.mvvmquick.base.MQFragment;
 import com.xujiaji.mvvmquick.base.MQViewModel;
+import com.xujiaji.mvvmquick.base.NoneViewModel;
 import com.xujiaji.mvvmquick.di.ActivityScoped;
 
 import javax.inject.Inject;
 
 @ActivityScoped
-public class GuideFragment extends MQFragment<FragmentGuideBinding, MQViewModel> {
+public class GuideFragment extends MQFragment<FragmentGuideBinding, NoneViewModel> {
     @Inject
     public GuideFragment() {
     }
