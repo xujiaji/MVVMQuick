@@ -15,6 +15,11 @@
 5. [mvvm-sample-app](https://github.com/hazems/mvvm-sample-app)
 6. [LearnMVVM](https://github.com/xujiaji/learn-android/tree/learn-mvvm)
 
+## dependencies
+
+```
+implementation 'com.github.xujiaji:mvvm-quick:0.0.1'
+```
 
 # Use
 详细使用案例请参考：https://github.com/xujiaji/WanAndroid

@@ -25,6 +25,7 @@ android {
     dataBinding {
         enabled = true
     }
+
 }
 
 dependencies {
@@ -52,3 +53,15 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide"
 }
 
+apply from: 'install.gradle'
+apply from: 'bintray.gradle'
+javadoc {
+    options{
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "https://github.com/xujiaji/MVVMQuick"
+        title "MVVMQuick Doc"
+    }
+}
