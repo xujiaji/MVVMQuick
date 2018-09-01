@@ -57,7 +57,7 @@ ext{
     siteUrl = 'https://github.com/xujiaji/MVVMQuick'
     gitUrl = 'https://github.com/xujiaji/MVVMQuick.git'
 
-    libraryVersion = '0.0.1'
+    libraryVersion = '0.0.2'
 
     developerId = 'xujiaji'
     developerName = 'xujiaji'
