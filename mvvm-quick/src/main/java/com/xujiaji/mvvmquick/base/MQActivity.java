@@ -19,12 +19,13 @@ package com.xujiaji.mvvmquick.base;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingUtil;
+import android.content.Intent;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
-import com.xujiaji.mvvmquick.interfaces.BindingViewModel;
+import com.xujiaji.mvvmquick.interfaces.MQView;
 import com.xujiaji.mvvmquick.util.ClassUtils;
 
 import javax.inject.Inject;
@@ -36,7 +37,7 @@ import dagger.android.support.DaggerAppCompatActivity;
  * created on: 2018/7/2 14:23
  * description:
  */
-public class MQActivity<B extends ViewDataBinding, VM extends AndroidViewModel> extends DaggerAppCompatActivity implements BindingViewModel<B, VM> {
+public abstract class MQActivity<B extends ViewDataBinding, VM extends AndroidViewModel> extends DaggerAppCompatActivity implements MQView<B, VM> {
 
     @Inject
     protected ViewModelProvider.Factory mViewModelFactory;
@@ -47,9 +48,23 @@ public class MQActivity<B extends ViewDataBinding, VM extends AndroidViewModel> 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        onBeforeCreate();
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            // 页面已被启用，但因内存不足页面被系统销毁过
+            onBundleHandle(savedInstanceState);
+        } else {
+            // 第一次进入页面获取上个页面传递过来的数据
+            Intent intent = getIntent();
+            if (intent != null) {
+                onIntentHandle(intent);
+            }
+        }
         initBinding();
         initViewModel();
+
+        onInit();
+        onListener();
     }
 
     /**
@@ -68,18 +83,52 @@ public class MQActivity<B extends ViewDataBinding, VM extends AndroidViewModel> 
      */
     private void initBinding() {
         binding = ClassUtils.getBinding(this, getLayoutInflater(), ((ViewGroup) findViewById(android.R.id.content)));
-        if (binding != null)
+        if (binding != null) {
             setContentView(binding.getRoot());
-        onBinding(binding);
+            onBinding(binding);
+        }
+    }
+
+    // 非standard的启动模式，第二次之后不会进入onCreate周期，转而是onNewIntent
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (intent != null) {
+            onIntentHandle(intent);
+        }
+
+
+        onListener();
     }
 
     @Override
-    public void onBinding(B binding) {
+    public void onObserveViewModel(@NonNull VM viewModel) {
 
     }
 
     @Override
-    public void onObserveViewModel(VM viewModel) {
+    public void onBeforeCreate() {
+
+    }
+
+    @Override
+    public void onBundleHandle(@NonNull Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void onInit() {
+
+    }
+
+    @Override
+    public void onListener() {
+
+    }
+
+    @Override
+    public void onIntentHandle(@NonNull Intent intent) {
 
     }
 }

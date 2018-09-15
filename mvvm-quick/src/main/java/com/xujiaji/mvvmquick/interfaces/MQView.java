@@ -14,26 +14,21 @@
  *    limitations under the License.
  */
 
-package com.xujiaji.learnmvvm.module.start.guide;
+package com.xujiaji.mvvmquick.interfaces;
 
+import android.arch.lifecycle.AndroidViewModel;
+import android.content.Intent;
+import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 
-import com.xujiaji.learnmvvm.databinding.FragmentGuideBinding;
-import com.xujiaji.mvvmquick.base.MQFragment;
-import com.xujiaji.mvvmquick.base.MQViewModel;
-import com.xujiaji.mvvmquick.base.NoneViewModel;
-import com.xujiaji.mvvmquick.di.ActivityScoped;
-
-import javax.inject.Inject;
-
-@ActivityScoped
-public class GuideFragment extends MQFragment<FragmentGuideBinding, NoneViewModel> {
-    @Inject
-    public GuideFragment() {
-    }
-
-    @Override
-    public void onBinding(@NonNull FragmentGuideBinding binding) {
-
-    }
+/**
+ * author: xujiaji
+ * created on: 2018/9/11 15:05
+ * description: 定义Activity View相关周期
+ */
+public interface MQView<B extends ViewDataBinding, VM extends AndroidViewModel> extends BindingViewModel<B, VM> {
+    /**
+     * 处理上个页面传递过来的数据
+     */
+    void onIntentHandle(@NonNull Intent intent);
 }

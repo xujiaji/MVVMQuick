@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/badge/version-0.0.2-green.svg)]()
+[![Version](https://img.shields.io/badge/version-0.0.3-green.svg)]()
 # MVVMQuick
 旨在快速以MVVM开始开发项目，其内集成了dagger2、okhttp3、retrofit、BaseRecyclerViewAdapterHelper、lifecycle等常用的框架和一些工具。
 
@@ -19,7 +19,7 @@
 ## dependencies
 
 ```
-implementation 'com.github.xujiaji:mvvm-quick:0.0.2'
+implementation 'com.github.xujiaji:mvvm-quick:0.0.3'
 ```
 
 # Use

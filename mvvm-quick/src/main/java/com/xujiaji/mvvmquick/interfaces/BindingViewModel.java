@@ -18,6 +18,8 @@ package com.xujiaji.mvvmquick.interfaces;
 
 import android.arch.lifecycle.AndroidViewModel;
 import android.databinding.ViewDataBinding;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 /**
  * author: xujiaji
@@ -28,11 +30,35 @@ public interface BindingViewModel<B extends ViewDataBinding, VM extends AndroidV
     /**
      * 实例化Binding后调用该方法
      */
-    void onBinding(B binding);
+    void onBinding(@NonNull B binding);
 
 
     /**
      * 实例化ViewModel后调用该方法
      */
-    void onObserveViewModel(VM viewModel);
+    void onObserveViewModel(@NonNull VM viewModel);
+
+
+    /**
+     * 在 super {@link android.app.Activity#onCreate(Bundle)}之前被调用
+     */
+    void onBeforeCreate();
+
+    /**
+     * 在 super {@link android.app.Activity#onCreate(Bundle)}之前被调用，并且有Bundle
+     * @param savedInstanceState 该参数不可能为null
+     */
+    void onBundleHandle(@NonNull Bundle savedInstanceState);
+
+    /**
+     * 写一些初始化的操作
+     * 在 {@link #onObserveViewModel(AndroidViewModel)}  之后被调用
+     */
+    void onInit();
+    /**
+     * 这里面写监听事件
+     * 在 {@link #onInit()}  之后被调用
+     */
+    void onListener();
+
 }

@@ -19,6 +19,7 @@ package com.xujiaji.learnmvvm.module.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -67,16 +68,13 @@ public class MainActivity extends MQActivity<ActivityMainBinding, NoneViewModel>
     }
 
     @Override
-    public void onBinding(ActivityMainBinding binding) {
-        super.onBinding(binding);
+    public void onBinding(@NonNull ActivityMainBinding binding) {
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setColorForDrawerLayout(this, binding.drawerLayout, ContextCompat.getColor(this, R.color.colorPrimaryDark), 0);
-        initToolbar();
-        initNavigationMenu();
         if (savedInstanceState == null) {
             ActivityUtils.addFragmentInActivity(
                     getSupportFragmentManager(),
@@ -85,6 +83,13 @@ public class MainActivity extends MQActivity<ActivityMainBinding, NoneViewModel>
                     ProjectListFragment.class.getSimpleName());
 
         }
+    }
+
+    @Override
+    public void onInit() {
+        StatusBarUtil.setColorForDrawerLayout(this, binding.drawerLayout, ContextCompat.getColor(this, R.color.colorPrimaryDark), 0);
+        initToolbar();
+        initNavigationMenu();
     }
 
     private void initToolbar() {

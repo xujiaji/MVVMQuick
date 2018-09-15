@@ -16,7 +16,9 @@
 
 package com.xujiaji.learnmvvm.module.start;
 
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.xujiaji.learnmvvm.R;
 import com.xujiaji.learnmvvm.module.projectlist.ProjectListFragment;
@@ -49,5 +51,10 @@ public class StartActivity extends MQActivity {
                     ProjectListFragment.class.getSimpleName());
 
         }
+    }
+
+    @Override
+    public void onBinding(@NonNull ViewDataBinding binding) {
+
     }
 }

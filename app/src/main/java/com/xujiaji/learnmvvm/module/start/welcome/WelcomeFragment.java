@@ -16,6 +16,8 @@
 
 package com.xujiaji.learnmvvm.module.start.welcome;
 
+import android.support.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
 import com.jaeger.library.StatusBarUtil;
 import com.qfxl.view.RoundProgressBar;
@@ -37,8 +39,7 @@ public class WelcomeFragment extends MQFragment<FragmentWelcomeBinding, NoneView
     }
 
     @Override
-    public void onBinding(FragmentWelcomeBinding binding) {
-        super.onBinding(binding);
+    public void onBinding(@NonNull FragmentWelcomeBinding binding) {
         StatusBarUtil.setTranslucentForImageViewInFragment(getActivity(), binding.roundProgressBar);
 
         Glide.with(this)
@@ -70,5 +71,15 @@ public class WelcomeFragment extends MQFragment<FragmentWelcomeBinding, NoneView
         isOver = true;
         MainActivity.launch(getActivity());
         getActivity().finish();
+    }
+
+    @Override
+    public void onLazyLoad() {
+
+    }
+
+    @Override
+    public boolean isInViewPager() {
+        return false;
     }
 }

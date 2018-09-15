@@ -40,7 +40,6 @@ public class ProjectViewModel extends BaseViewModel {
         ABSENT.setValue(null);
     }
 
-    private final MutableLiveData<String> projectID = new MutableLiveData<>();
 
     private final NetLiveEvent<Project> projectObservable = new NetLiveEvent<>();
 
@@ -49,10 +48,10 @@ public class ProjectViewModel extends BaseViewModel {
     @Inject
     public ProjectViewModel(@NonNull Application application) {
         super(application);
-        projectID.observeForever(s -> projectObservable.setValue(net.get().getProjectDetails("xujiaji", s)));
     }
 
-    public NetLiveEvent<Project> getObservableProject() {
+    public NetLiveEvent<Project> getObservableProject(String projectId) {
+        projectObservable.setValue(net.get().getProjectDetails("xujiaji", projectId));
         return projectObservable;
     }
 
@@ -60,7 +59,4 @@ public class ProjectViewModel extends BaseViewModel {
         this.project.set(project);
     }
 
-    public void setProjectID(String projectID) {
-        this.projectID.setValue(projectID);
-    }
 }

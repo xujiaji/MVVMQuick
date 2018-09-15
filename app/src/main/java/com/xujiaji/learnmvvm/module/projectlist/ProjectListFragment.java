@@ -17,6 +17,7 @@
 package com.xujiaji.learnmvvm.module.projectlist;
 
 import android.arch.lifecycle.Lifecycle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.xujiaji.learnmvvm.R;
@@ -49,21 +50,13 @@ public class ProjectListFragment extends MQFragment<FragmentProjectListBinding, 
     }
 
     @Override
-    public void onBinding(FragmentProjectListBinding binding) {
+    public void onBinding(@NonNull FragmentProjectListBinding binding) {
         binding.projectRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimaryDark, R.color.colorPrimary);
     }
 
     @Override
-    public void onObserveViewModel(ProjectListViewModel viewModel) {
+    public void onObserveViewModel(@NonNull ProjectListViewModel viewModel) {
         binding.setProjectListViewModel(viewModel);
-        viewModel.getProjectListObservable().observeData(this, new DataCallbackImp<List<Project>>(binding.projectRefresh) {
-            @Override
-            public void success(List<Project> bean) {
-                binding.setIsLoading(false);
-                viewModel.items.clear();
-                viewModel.items.addAll(bean);
-            }
-        });
 
         viewModel.getClickProjectEvent().observe(this, project ->
         {
@@ -74,5 +67,23 @@ public class ProjectListFragment extends MQFragment<FragmentProjectListBinding, 
 
         binding.projectList.setAdapter(mAdapter.get());
         mAdapter.get().setEmptyView(R.layout.no_item_archived, binding.projectList);
+    }
+
+    @Override
+    public void onLazyLoad() {
+        viewModel.getProjectListObservable().observeData(this, new DataCallbackImp<List<Project>>(binding.projectRefresh) {
+            @Override
+            public void success(List<Project> bean) {
+                binding.setIsLoading(false);
+                viewModel.items.clear();
+                viewModel.items.addAll(bean);
+            }
+        });
+
+    }
+
+    @Override
+    public boolean isInViewPager() {
+        return false;
     }
 }
