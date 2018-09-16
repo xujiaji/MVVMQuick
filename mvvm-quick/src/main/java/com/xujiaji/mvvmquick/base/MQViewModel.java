@@ -37,6 +37,7 @@ public class MQViewModel extends AndroidViewModel {
     }
 
     public void onListRefresh() {
+        loadOffset = initLoadOffset();
     }
 
     public void onListLoad(int offset) {
