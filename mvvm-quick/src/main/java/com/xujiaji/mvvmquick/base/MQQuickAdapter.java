@@ -101,7 +101,10 @@ public abstract class MQQuickAdapter<T, B extends ViewDataBinding>
         return null;
     }
 
-    public void setLoaded() {
-        loaded = true;
+    public void setLoaded(boolean end) {
+        loaded = end;
+        if (!end) {
+            this.loadMoreComplete();
+        }
     }
 }
